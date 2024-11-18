@@ -179,7 +179,7 @@ export default class ConversationView extends Component {
                   ''
                 )}
                 {messages
-                  ? messages
+                  ? messages.slice()
                     // .filter((message, index, self) => index === self.findIndex(t => t.message() === message.message()))
                     .sort((a, b) => a.createdAt() - b.createdAt())
                     .map((message, i) => {
@@ -292,7 +292,7 @@ export default class ConversationView extends Component {
         conversationId: this.conversation.id(),
       })
       .then((message) => {
-        app.cache.messages[this.conversation.id()].push(message);
+        app.cache.messages[this.conversation.id()][message.data.id] = message;
         m.redraw();
         this.messageContent('');
         this.isSending = false;
@@ -347,12 +347,10 @@ export default class ConversationView extends Component {
             });
         }
 
-        app.cache.messages[this.conversation.id()].push(...results);
-
         if (results.length < 20) {
           this.isNew = false;
         }
-
+        results.forEach((result) => app.cache.messages[this.conversation.id()][result.data.id] = result);
         this.loading = false;
         m.redraw();
       });
