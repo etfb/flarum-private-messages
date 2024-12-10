@@ -12,6 +12,9 @@ export default class ConversationsDropdown extends NotificationsDropdown {
   }
 
   onclick() {
+    if (app.drawer.isOpen()) {
+      m.route.set(app.route('conversations'));
+    }
   }
 
   getMenu() {

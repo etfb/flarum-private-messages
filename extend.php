@@ -53,6 +53,10 @@ return [
         ->serializeToForum('neoncubePrivateMessagesReturnKey', 'neoncube-private-messages.return_key', function ($value) {
             return (bool)$value;
         }),
+    // (new Extend\Settings())
+    //     ->serializeToForum('neoncubePrivateMessagesShowReadReceipts', 'neoncube-private-messages.show_read_receipts', function ($value) {
+    //         return (bool)$value;
+    //     }),
     // (new Extend\ApiSerializer(CurrentUserSerializer::class))
     //     ->hasMany('conversations', ConversationRecipientSerializer::class),
 

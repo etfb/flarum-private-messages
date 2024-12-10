@@ -185,34 +185,36 @@ export default class ConversationView extends Component {
                     .map((message, i) => {
                       const myMessage = parseInt(message.user().id()) === parseInt(app.session.user.id());
                       return (
-                        <li className="clearfix message-content">
-                          <div className={'message-data ' + (myMessage ? 'align-right' : '')}>
-                            <div className={'avatar-inline ' + (myMessage ? 'me' : 'other')}>
+                        <li className={'message-content ' + (myMessage ? 'my-message' : 'other-message')}>
+                          <div className="message-data">
+                            <div className="avatar-inline">
                               {avatar(myMessage ? app.session.user : message.user())}
                             </div>
                             <span className="message-data-name">{username(myMessage ? app.session.user : message.user())}</span>
                             <span className="message-data-time">{humanTime(message.createdAt())}</span>
                           </div>
-                          <MessageText
-                            content={message.message()}
-                            className={'message ' + (myMessage ? 'my-message float-right' : 'other-message')}
-                          />
-                          {myMessage ? (
-                            parseInt(this.recipient.lastRead()) >= parseInt(message.data.attributes.number) ? (
-                              <span className="message-read">{icon('fas fa-check')}</span>
+
+                          <div className="message-text-and-indicators">
+                            <MessageText content={message.message()} />
+                            {myMessage ? (
+                              parseInt(this.recipient.lastRead()) >= parseInt(message.data.attributes.number) ? (
+                                <span className="message-read" title={app.translator.trans('neoncube-private-messages.forum.chat.message_read')}>{icon('fas fa-check')}</span>
+                              ) : (
+                                ''
+                              )
                             ) : (
                               ''
-                            )
-                          ) : (
-                            ''
-                          )}
+                            )}
+                          </div>
                         </li>
                       );
                     })
                   : ''}
                 {this.messageContent() ? (
-                  <li>
-                    <MessageText content={this.messageContent()} className={'message my-message float-right message-preview'} preview={true} />
+                  <li className="message-content my-message message-preview">
+                    <div className="message-text-and-indicators">
+                      <MessageText content={this.messageContent()} preview={true} />
+                    </div>
                   </li>
                 ) : (
                   ''
