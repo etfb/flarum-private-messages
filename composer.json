@@ -38,7 +38,7 @@
     "support": {
         "issues": "https://github.com/neoncube/flarum-private-messaging/issues",
         "source": "https://github.com/neoncube/flarum-private-messaging",
-        "forum": "https://discuss.flarum.org/d/..."
+        "forum": "https://discuss.flarum.org/d/35388-private-messages"
     },
     "require": {
         "flarum/core": "^1.8.5"
